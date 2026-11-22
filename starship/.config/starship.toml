@@ -35,10 +35,8 @@ $rust\
 $scala\
 [](fg:blue_faint bg:magenta_cooler)\
 $docker_context\
-[](fg:magenta_cooler bg:bg_blue_subtle)\
 $cmd_duration\
-$time\
-[ ](fg:bg_blue_subtle)\
+[ ](fg:magenta_cooler)\
 """
 
 [palettes.ef_bio]
@@ -180,11 +178,5 @@ format = '[ $symbol $context ]($style)'
 
 [cmd_duration]
 min_time = 2000
-style = "bg:bg_blue_subtle fg:yellow_cooler"
+style = "bg:magenta_cooler fg:bg_main"
 format = '[  $duration ]($style)'
-
-[time]
-disabled = false
-time_format = "%R"
-style = "bg:bg_blue_subtle fg:fg_main"
-format = '[  $time ]($style)'
