@@ -10,9 +10,6 @@ cd ~/dotfiles
 brew bundle
 stow zsh starship scripts
 ./macos.sh
-
-# Emacs config (separate repo)
-git clone --recurse-submodules git@github.com:danielyaren/emacs.d.git ~/.emacs.d
 ```
 
 ## Updating
