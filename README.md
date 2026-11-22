@@ -5,7 +5,7 @@ Managed with [GNU Stow](https://www.gnu.org/software/stow/).
 ## Bootstrap on a new Mac
 
 ```sh
-git clone <your-repo-url> ~/dotfiles
+git clone https://github.com/danielyaren/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 brew bundle
 stow zsh starship scripts
