@@ -26,18 +26,56 @@ fmt_tokens() {
   fi
 }
 
+# Format reset countdown cleanly (e.g. 346 -> 6m, 7500 -> 2h5m)
+fmt_duration() {
+  local s="${1:-0}"
+  if ! [[ "$s" =~ ^[0-9]+$ ]] || (( s <= 0 )); then
+    return
+  fi
+  local h=$(( s / 3600 ))
+  local m=$(( (s % 3600 + 30) / 60 ))
+  if (( m == 60 )); then
+    h=$(( h + 1 ))
+    m=0
+  fi
+  if (( h > 0 && m > 0 )); then
+    printf '%dh%dm' "$h" "$m"
+  elif (( h > 0 )); then
+    printf '%dh' "$h"
+  else
+    printf '%dm' "$m"
+  fi
+}
+
+# Pick quota color based on remaining percentage
+quota_color() {
+  local pct="${1:-100}"
+  if (( pct <= 15 )); then
+    printf '%s' "$FG_RED"
+  elif (( pct <= 40 )); then
+    printf '%s' "$FG_YLW"
+  else
+    printf '%s' "$FG_GRN"
+  fi
+}
+
 # Parse fields defensively (supports model as object or string).
 eval "$(
   printf '%s' "$INPUT" | jq -r '
-    @sh "MODEL=\(if (.model | type) == "object" then (.model.display_name // .model.id // "unknown") else (.model // "unknown") end)",
+    (if (.model | type) == "object" then (.model.display_name // .model.id // "unknown") else (.model // "unknown") end) as $model |
+    (if ($model | ascii_downcase | contains("gemini")) then "gemini" else "3p" end) as $qprefix |
+    (.quota[$qprefix + "-5h"] // .quota["gemini-5h"] // null) as $q5h |
+    (.quota[$qprefix + "-weekly"] // .quota["gemini-weekly"] // null) as $qwk |
+    @sh "MODEL=\($model)",
     @sh "EFFORT=\(if (.model | type) == "object" then (.model.effort // "") else "" end)",
     @sh "DIR=\(.workspace.current_dir // .workspace.project_dir // .cwd // "")",
     @sh "STATE=\(.agent_state // "")",
     @sh "CTX_PCT=\(.context_window.used_percentage // "")",
     @sh "TOTAL_IN=\(.context_window.total_input_tokens // "")",
     @sh "TOTAL_OUT=\(.context_window.total_output_tokens // "")",
-    @sh "COST=\(if (.cost | type) == "object" then (.cost.total_cost_usd // .cost.estimated // "") else (.cost // "") end)",
-    @sh "QUOTA_REM=\(.quota.remaining_percentage // .rate_limit.remaining_percentage // "")"
+    @sh "Q5H_PCT=\(if $q5h and ($q5h.remaining_fraction != null) then (($q5h.remaining_fraction * 100) | round) else "" end)",
+    @sh "Q5H_RESET=\(if $q5h and ($q5h.reset_in_seconds != null) then ($q5h.reset_in_seconds | round) else "" end)",
+    @sh "QWK_PCT=\(if $qwk and ($qwk.remaining_fraction != null) then (($qwk.remaining_fraction * 100) | round) else "" end)"
   ' 2>/dev/null || true
 )"
 
@@ -48,8 +86,9 @@ STATE="${STATE:-}"
 CTX_PCT="${CTX_PCT:-}"
 TOTAL_IN="${TOTAL_IN:-}"
 TOTAL_OUT="${TOTAL_OUT:-}"
-COST="${COST:-}"
-QUOTA_REM="${QUOTA_REM:-}"
+Q5H_PCT="${Q5H_PCT:-}"
+Q5H_RESET="${Q5H_RESET:-}"
+QWK_PCT="${QWK_PCT:-}"
 
 # ef-bio 24-bit ANSI palette
 RST=$'\033[0m'
@@ -93,18 +132,27 @@ if [[ -n "$DIR" ]]; then
   OUT+=" ${RST}"
 fi
 
-# Context window usage segment.
+# Context window usage segment (dynamic gauge ○ ◔ ◑ ◕ ●).
 if [[ -n "$CTX_PCT" ]]; then
   PCT_INT="${CTX_PCT%%.*}"
   if [[ "$PCT_INT" =~ ^[0-9]+$ ]]; then
     if (( PCT_INT >= 85 )); then
       CTX_COLOR="$FG_RED"
+      CTX_ICON="●"
     elif (( PCT_INT >= 60 )); then
       CTX_COLOR="$FG_YLW"
+      CTX_ICON="◕"
+    elif (( PCT_INT >= 35 )); then
+      CTX_COLOR="$FG_GRN"
+      CTX_ICON="◑"
+    elif (( PCT_INT >= 10 )); then
+      CTX_COLOR="$FG_GRN"
+      CTX_ICON="◔"
     else
       CTX_COLOR="$FG_GRN"
+      CTX_ICON="○"
     fi
-    OUT+="${BG_DIM}${FG_DIM}| ${CTX_COLOR}📊 ${PCT_INT}%${RST}${BG_DIM} "
+    OUT+="${BG_DIM}${FG_DIM}| ${CTX_COLOR}${CTX_ICON} ${PCT_INT}%${RST}${BG_DIM} "
   fi
 fi
 
@@ -115,25 +163,23 @@ if [[ -n "$TOTAL_IN" || -n "$TOTAL_OUT" ]]; then
   OUT+="${BG_DIM}${FG_DIM}| ${FG_CYN}↑${IN_FMT} ${FG_BLU}↓${OUT_FMT} ${RST}"
 fi
 
-# Quota remaining (if provided by CLI).
-if [[ -n "$QUOTA_REM" ]]; then
-  Q_INT="${QUOTA_REM%%.*}"
-  if [[ "$Q_INT" =~ ^[0-9]+$ ]]; then
-    if (( Q_INT <= 15 )); then
-      Q_COLOR="$FG_RED"
-    elif (( Q_INT <= 40 )); then
-      Q_COLOR="$FG_YLW"
-    else
-      Q_COLOR="$FG_GRN"
+# Quota remaining (5h window + reset countdown, and 7d weekly window).
+if [[ -n "$Q5H_PCT" || -n "$QWK_PCT" ]]; then
+  OUT+="${BG_DIM}${FG_DIM}| ⚡ "
+  if [[ -n "$Q5H_PCT" && "$Q5H_PCT" =~ ^[0-9]+$ ]]; then
+    Q5H_COL="$(quota_color "$Q5H_PCT")"
+    OUT+="${FG_DIM}5h ${Q5H_COL}${Q5H_PCT}%"
+    if [[ -n "$Q5H_RESET" ]] && (( Q5H_PCT < 100 )); then
+      RST_FMT="$(fmt_duration "$Q5H_RESET")"
+      [[ -n "$RST_FMT" ]] && OUT+="${FG_DIM} (${RST_FMT})"
     fi
-    OUT+="${BG_DIM}${FG_DIM}| ${Q_COLOR}⚡ ${Q_INT}% ${RST}"
   fi
-fi
-
-# Estimated session cost (if provided by CLI).
-if [[ -n "$COST" && "$COST" != "0" ]]; then
-  COST_FMT="$(awk -v c="$COST" 'BEGIN { printf "$%.2f", c }' 2>/dev/null || printf '$%s' "$COST")"
-  OUT+="${BG_DIM}${FG_DIM}| ${FG_YLW}💰 ${COST_FMT} ${RST}"
+  if [[ -n "$QWK_PCT" && "$QWK_PCT" =~ ^[0-9]+$ ]]; then
+    QWK_COL="$(quota_color "$QWK_PCT")"
+    [[ -n "$Q5H_PCT" ]] && OUT+=" ${FG_DIM}· "
+    OUT+="${FG_DIM}7d ${QWK_COL}${QWK_PCT}%"
+  fi
+  OUT+=" ${RST}"
 fi
 
 # Non-idle agent state indicator.
