@@ -104,7 +104,7 @@ if [[ -n "$CTX_PCT" ]]; then
     else
       CTX_COLOR="$FG_GRN"
     fi
-    OUT+="${BG_DIM}${FG_DIM}| ${CTX_COLOR}🧠 ${PCT_INT}%${RST}${BG_DIM} "
+    OUT+="${BG_DIM}${FG_DIM}| ${CTX_COLOR}📊 ${PCT_INT}%${RST}${BG_DIM} "
   fi
 fi
 
