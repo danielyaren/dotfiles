@@ -9,6 +9,7 @@ git clone <your-repo-url> ~/dotfiles
 cd ~/dotfiles
 brew bundle
 stow zsh starship
+./macos.sh
 ```
 
 ## Updating
