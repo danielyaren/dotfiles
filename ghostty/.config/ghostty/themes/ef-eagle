@@ -1,0 +1,23 @@
+# ef-eagle — Legible light beige theme with brown, red, and desatured colors.
+palette = 0=#231a1f
+palette = 1=#882000
+palette = 2=#226022
+palette = 3=#6b4500
+palette = 4=#113384
+palette = 5=#822478
+palette = 6=#125a7f
+palette = 7=#aea88e
+palette = 8=#685f53
+palette = 9=#9a0000
+palette = 10=#006e50
+palette = 11=#843300
+palette = 12=#3a3da0
+palette = 13=#50119f
+palette = 14=#00676f
+palette = 15=#f1ecd0
+background = #f1ecd0
+foreground = #231a1f
+cursor-color = #774400
+cursor-text = #f1ecd0
+selection-background = #ddc5af
+selection-foreground = #231a1f

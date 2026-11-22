@@ -1,0 +1,23 @@
+# ef-melissa-dark — Legible dark honeybee theme with warm colors (yellow, red, green, cyan).
+palette = 0=#59463f
+palette = 1=#ff7f7f
+palette = 2=#6fd560
+palette = 3=#e4b53f
+palette = 4=#57aff6
+palette = 5=#f0aac5
+palette = 6=#6fcad0
+palette = 7=#e8e4b1
+palette = 8=#90918a
+palette = 9=#ff7f4f
+palette = 10=#65d590
+palette = 11=#ffa21f
+palette = 12=#98bfff
+palette = 13=#c6a2fe
+palette = 14=#70e0cf
+palette = 15=#ffffff
+background = #352718
+foreground = #e8e4b1
+cursor-color = #f9cf7a
+cursor-text = #352718
+selection-background = #443a4f
+selection-foreground = #e8e4b1

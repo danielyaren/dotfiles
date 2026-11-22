@@ -1,0 +1,23 @@
+# ef-arbutus — Legible light pink theme with red and green colors.
+palette = 0=#393330
+palette = 1=#b0000f
+palette = 2=#007000
+palette = 3=#906200
+palette = 4=#375cc6
+palette = 5=#a23ea4
+palette = 6=#3f69af
+palette = 7=#c7b2ab
+palette = 8=#6e678f
+palette = 9=#b20f00
+palette = 10=#00704f
+palette = 11=#b44405
+palette = 12=#5f55df
+palette = 13=#6448ca
+palette = 14=#0f7688
+palette = 15=#ffead8
+background = #ffead8
+foreground = #393330
+cursor-color = #208f10
+cursor-text = #ffead8
+selection-background = #dbe0c0
+selection-foreground = #393330

@@ -1,0 +1,23 @@
+# ef-winter — Legible dark purple-black theme with magenta, purple, fawn, teal colors.
+palette = 0=#2a2f42
+palette = 1=#f47359
+palette = 2=#29a444
+palette = 3=#b58a52
+palette = 4=#3f95f6
+palette = 5=#d369af
+palette = 6=#4fbaef
+palette = 7=#b8c6d5
+palette = 8=#807c9f
+palette = 9=#ef6560
+palette = 10=#00a392
+palette = 11=#d1803f
+palette = 12=#6a9fff
+palette = 13=#af85ea
+palette = 14=#35afbf
+palette = 15=#ffffff
+background = #0f0b15
+foreground = #b8c6d5
+cursor-color = #ff6ff0
+cursor-text = #0f0b15
+selection-background = #342464
+selection-foreground = #b8c6d5

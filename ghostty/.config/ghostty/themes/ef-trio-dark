@@ -1,0 +1,23 @@
+# ef-trio-dark — Legible dark purple grey theme with magenta, blue, teal colors.
+palette = 0=#362f35
+palette = 1=#f48359
+palette = 2=#60b444
+palette = 3=#d4a052
+palette = 4=#7fa5f6
+palette = 5=#d37faf
+palette = 6=#8fbaff
+palette = 7=#d8cfd5
+palette = 8=#908890
+palette = 9=#ff7560
+palette = 10=#60bf88
+palette = 11=#ef926f
+palette = 12=#8895ff
+palette = 13=#a698ef
+palette = 14=#8fcfdf
+palette = 15=#ffffff
+background = #160f0f
+foreground = #d8cfd5
+cursor-color = #ff99ff
+cursor-text = #160f0f
+selection-background = #16304f
+selection-foreground = #d8cfd5

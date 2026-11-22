@@ -1,0 +1,23 @@
+# ef-frost — Legible light cool theme with blue, cyan, teal, purple colors.
+palette = 0=#232323
+palette = 1=#c42d2f
+palette = 2=#008a00
+palette = 3=#aa6100
+palette = 4=#004fc0
+palette = 5=#aa44c5
+palette = 6=#1f6fbf
+palette = 7=#b5b8b8
+palette = 8=#66657f
+palette = 9=#d03003
+palette = 10=#00845f
+palette = 11=#b6532f
+palette = 12=#4244ef
+palette = 13=#7f5ae0
+palette = 14=#007a85
+palette = 15=#fcffff
+background = #fcffff
+foreground = #232323
+cursor-color = #0055bb
+cursor-text = #fcffff
+selection-background = #d4eaf3
+selection-foreground = #232323

@@ -1,0 +1,23 @@
+# ef-atlantis — Legible dark theme with aquatic colors.
+palette = 0=#272a3e
+palette = 1=#ef656a
+palette = 2=#1fa526
+palette = 3=#c48502
+palette = 4=#379cf6
+palette = 5=#d590af
+palette = 6=#4fb0cf
+palette = 7=#bfcccf
+palette = 8=#7f8385
+palette = 9=#f47360
+palette = 10=#00a962
+palette = 11=#e6832f
+palette = 12=#6a88ff
+palette = 13=#af9ef2
+palette = 14=#5db2b7
+palette = 15=#ffffff
+background = #1a143e
+foreground = #bfcccf
+cursor-color = #baa1ab
+cursor-text = #1a143e
+selection-background = #32446b
+selection-foreground = #bfcccf

@@ -1,0 +1,23 @@
+# ef-cyprus — Legible light ochre theme with green, yellow, teal, red colors.
+palette = 0=#242521
+palette = 1=#9f0d0f
+palette = 2=#006f00
+palette = 3=#a7601f
+palette = 4=#375cc6
+palette = 5=#9a456f
+palette = 6=#1f70af
+palette = 7=#c5c3b8
+palette = 8=#59786f
+palette = 9=#dd0020
+palette = 10=#00824f
+palette = 11=#bf4400
+palette = 12=#444fcf
+palette = 13=#8448aa
+palette = 14=#007a9f
+palette = 15=#fcf7ef
+background = #fcf7ef
+foreground = #242521
+cursor-color = #007f00
+cursor-text = #fcf7ef
+selection-background = #e0e7e5
+selection-foreground = #242521

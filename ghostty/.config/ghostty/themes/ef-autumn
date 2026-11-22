@@ -1,0 +1,23 @@
+# ef-autumn — Legible dark brown-black theme with warm colors (red, yellow, green, teal).
+palette = 0=#36322f
+palette = 1=#ef656a
+palette = 2=#2fa526
+palette = 3=#c48702
+palette = 4=#379cf6
+palette = 5=#d570af
+palette = 6=#4fb0cf
+palette = 7=#cfbcba
+palette = 8=#887c8a
+palette = 9=#f06a3f
+palette = 10=#00b066
+palette = 11=#d0730f
+palette = 12=#6a88ff
+palette = 13=#af8aff
+palette = 14=#3dbbb0
+palette = 15=#ffffff
+background = #0f0e06
+foreground = #cfbcba
+cursor-color = #ffaa33
+cursor-text = #0f0e06
+selection-background = #3f1324
+selection-foreground = #cfbcba

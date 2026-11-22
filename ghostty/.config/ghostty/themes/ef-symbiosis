@@ -1,0 +1,23 @@
+# ef-symbiosis — Legible dark brown-black theme with blue, green, cyan, gold colors.
+palette = 0=#372d32
+palette = 1=#ef6360
+palette = 2=#0faa26
+palette = 3=#bf9032
+palette = 4=#3f95f6
+palette = 5=#d369af
+palette = 6=#4fbaef
+palette = 7=#d0d0d0
+palette = 8=#857f8f
+palette = 9=#ff7355
+palette = 10=#00a692
+palette = 11=#d1843f
+palette = 12=#6a9fff
+palette = 13=#af85ff
+palette = 14=#1dbfcf
+palette = 15=#ffffff
+background = #130911
+foreground = #d0d0d0
+cursor-color = #f0af7f
+cursor-text = #130911
+selection-background = #3f2f40
+selection-foreground = #d0d0d0

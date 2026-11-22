@@ -1,0 +1,16 @@
+theme = ef-bio
+minimum-contrast = 3
+
+font-family = Monaco
+font-size = 12
+
+window-padding-x = 8
+window-padding-y = 8
+window-padding-balance = true
+
+cursor-style = block
+cursor-style-blink = false
+
+macos-option-as-alt = true
+macos-titlebar-style = tabs
+mouse-hide-while-typing = true

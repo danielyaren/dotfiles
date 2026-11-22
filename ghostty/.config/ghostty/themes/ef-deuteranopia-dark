@@ -1,0 +1,23 @@
+# ef-deuteranopia-dark — Legible dark theme, optimized for red-green color deficiency.
+palette = 0=#243145
+palette = 1=#cf8560
+palette = 2=#3faa26
+palette = 3=#aa9f32
+palette = 4=#3f90f0
+palette = 5=#b379bf
+palette = 6=#5faaef
+palette = 7=#ddddee
+palette = 8=#7f8797
+palette = 9=#e47360
+palette = 10=#3fa672
+palette = 11=#cfaf00
+palette = 12=#6a9fff
+palette = 13=#9f95ff
+palette = 14=#0db0ff
+palette = 15=#ffffff
+background = #000a1f
+foreground = #ddddee
+cursor-color = #ffff00
+cursor-text = #000a1f
+selection-background = #223848
+selection-foreground = #ddddee
