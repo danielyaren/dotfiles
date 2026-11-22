@@ -8,7 +8,7 @@ Managed with [GNU Stow](https://www.gnu.org/software/stow/).
 git clone git@github.com:danielyaren/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 brew bundle
-stow zsh starship scripts
+stow zsh starship scripts git
 ./macos.sh
 ```
 
