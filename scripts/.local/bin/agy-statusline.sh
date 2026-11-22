@@ -31,10 +31,9 @@ eval "$(
   printf '%s' "$INPUT" | jq -r '
     @sh "MODEL=\(if (.model | type) == "object" then (.model.display_name // .model.id // "unknown") else (.model // "unknown") end)",
     @sh "EFFORT=\(if (.model | type) == "object" then (.model.effort // "") else "" end)",
-    @sh "DIR=\(.workspace.current_dir // .cwd // "")",
+    @sh "DIR=\(.workspace.current_dir // .workspace.project_dir // .cwd // "")",
     @sh "STATE=\(.agent_state // "")",
     @sh "CTX_PCT=\(.context_window.used_percentage // "")",
-    @sh "CTX_SIZE=\(.context_window.context_window_size // "")",
     @sh "TOTAL_IN=\(.context_window.total_input_tokens // "")",
     @sh "TOTAL_OUT=\(.context_window.total_output_tokens // "")",
     @sh "COST=\(if (.cost | type) == "object" then (.cost.total_cost_usd // .cost.estimated // "") else (.cost // "") end)",
@@ -44,10 +43,9 @@ eval "$(
 
 MODEL="${MODEL:-agy}"
 EFFORT="${EFFORT:-}"
-DIR="${DIR:-}"
+DIR="${DIR:-$PWD}"
 STATE="${STATE:-}"
 CTX_PCT="${CTX_PCT:-}"
-CTX_SIZE="${CTX_SIZE:-}"
 TOTAL_IN="${TOTAL_IN:-}"
 TOTAL_OUT="${TOTAL_OUT:-}"
 COST="${COST:-}"
@@ -76,18 +74,21 @@ if [[ -n "$EFFORT" ]]; then
     LABEL="$LABEL ($EFFORT)"
   fi
 fi
-OUT="${BG_ML}${FG_ML}${BOLD} ${LABEL} ${RST}"
+OUT="${BG_ML}${FG_ML}${BOLD} ✨ ${LABEL} ${RST}"
 
-# Directory + git branch segment.
+# Directory + git branch (+ dirty marker) segment.
 if [[ -n "$DIR" ]]; then
   SHORT_DIR="${DIR/#$HOME/~}"
-  BRANCH=""
+  OUT+="${BG_DIM}${FG_MAIN} 📁 ${SHORT_DIR}"
   if git -C "$DIR" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     BRANCH="$(git -C "$DIR" symbolic-ref --short HEAD 2>/dev/null || git -C "$DIR" rev-parse --short HEAD 2>/dev/null || true)"
-  fi
-  OUT+="${BG_DIM}${FG_MAIN} ${SHORT_DIR}"
-  if [[ -n "$BRANCH" ]]; then
-    OUT+=" ${FG_GRN}(${BRANCH})"
+    if [[ -n "$BRANCH" ]]; then
+      DIRTY=""
+      if [[ -n "$(git -C "$DIR" status --porcelain 2>/dev/null | head -n 1)" ]]; then
+        DIRTY="${FG_YLW}*"
+      fi
+      OUT+=" ${FG_GRN}🌿 ${BRANCH}${DIRTY}"
+    fi
   fi
   OUT+=" ${RST}"
 fi
@@ -103,7 +104,7 @@ if [[ -n "$CTX_PCT" ]]; then
     else
       CTX_COLOR="$FG_GRN"
     fi
-    OUT+="${BG_DIM}${FG_DIM}| ${CTX_COLOR}ctx ${PCT_INT}%${RST}${BG_DIM} "
+    OUT+="${BG_DIM}${FG_DIM}| ${CTX_COLOR}🧠 ${PCT_INT}%${RST}${BG_DIM} "
   fi
 fi
 
@@ -125,19 +126,19 @@ if [[ -n "$QUOTA_REM" ]]; then
     else
       Q_COLOR="$FG_GRN"
     fi
-    OUT+="${BG_DIM}${FG_DIM}| ${Q_COLOR}quota ${Q_INT}% ${RST}"
+    OUT+="${BG_DIM}${FG_DIM}| ${Q_COLOR}⚡ ${Q_INT}% ${RST}"
   fi
 fi
 
 # Estimated session cost (if provided by CLI).
 if [[ -n "$COST" && "$COST" != "0" ]]; then
   COST_FMT="$(awk -v c="$COST" 'BEGIN { printf "$%.2f", c }' 2>/dev/null || printf '$%s' "$COST")"
-  OUT+="${BG_DIM}${FG_DIM}| ${FG_YLW}${COST_FMT} ${RST}"
+  OUT+="${BG_DIM}${FG_DIM}| ${FG_YLW}💰 ${COST_FMT} ${RST}"
 fi
 
 # Non-idle agent state indicator.
 if [[ -n "$STATE" && "$STATE" != "idle" ]]; then
-  OUT+="${BG_DIM}${FG_DIM}| ${FG_YLW}${STATE} ${RST}"
+  OUT+="${BG_DIM}${FG_DIM}| ${FG_YLW}⚙️ ${STATE} ${RST}"
 fi
 
 printf '%s\n' "$OUT"
