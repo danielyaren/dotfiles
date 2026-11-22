@@ -1,0 +1,19 @@
+# Sheldon plugin configuration
+# Docs: https://sheldon.cli.rs
+shell = "zsh"
+
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+apply = ["fpath"]
+
+[plugins.compinit]
+inline = 'autoload -Uz compinit && compinit'
+
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+
+[plugins.zsh-syntax-highlighting]
+github = "zsh-users/zsh-syntax-highlighting"

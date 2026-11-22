@@ -1,0 +1,5 @@
+brew "stow"
+brew "sheldon"
+brew "starship"
+brew "fzf"
+brew "zoxide"
