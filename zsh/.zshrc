@@ -50,5 +50,8 @@ if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
 fi
 
+# Aliases
+alias ls='ls -1G'
+
 # Machine-local overrides and secrets (untracked)
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
