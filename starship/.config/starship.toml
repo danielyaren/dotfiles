@@ -1,35 +1,71 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-add_newline = true
+# Pastel Powerline layout styled with Protesilaos' ef-bio palette
+# (~/.emacs.d/lib/ef-themes/ef-bio-theme.el)
+
+palette = "ef_bio"
 
 format = """
-[░▒▓](#a3aed2)\
+[](bg_mode_line)\
 $os\
-[](bg:#769ff0 fg:#a3aed2)\
+$username\
+[](bg:green_cooler fg:bg_mode_line)\
 $directory\
-[](fg:#769ff0 bg:#394260)\
+[](fg:green_cooler bg:cyan_cooler)\
 $git_branch\
 $git_status\
-[](fg:#394260 bg:#212736)\
+[](fg:cyan_cooler bg:blue_faint)\
+$c\
+$cpp\
+$dotnet\
+$elixir\
+$elm\
+$golang\
+$gradle\
+$haskell\
+$java\
+$julia\
+$maven\
 $nodejs\
 $bun\
-$python\
-$dotnet\
-$rust\
-$golang\
+$nim\
 $php\
-[](fg:#212736 bg:#1d2230)\
+$python\
+$rust\
+$scala\
+[](fg:blue_faint bg:magenta_cooler)\
+$docker_context\
+[](fg:magenta_cooler bg:bg_blue_subtle)\
 $cmd_duration\
 $time\
-[ ](fg:#1d2230)\
-\n$character"""
+[ ](fg:bg_blue_subtle)\
+"""
 
-[character]
-success_symbol = "[❯](bold #9ece6a)"
-error_symbol = "[❯](bold #f7768e)"
+[palettes.ef_bio]
+bg_main = "#111111"
+bg_mode_line = "#00552f"
+fg_mode_line = "#d0ffe0"
+fg_main = "#cfdfd5"
+green_cooler = "#00c089"
+cyan_cooler = "#5dc0aa"
+blue_faint = "#6ab4cf"
+magenta_cooler = "#af9fff"
+bg_blue_subtle = "#1a3863"
+yellow_cooler = "#cfc04f"
+
+[username]
+show_always = true
+style_user = "bg:bg_mode_line fg:fg_mode_line bold"
+style_root = "bg:bg_mode_line fg:yellow_cooler bold"
+format = '[$user ]($style)'
+disabled = false
+
+[os]
+style = "bg:bg_mode_line fg:fg_mode_line"
+disabled = true
 
 [directory]
-style = "fg:#e3e5e5 bg:#769ff0"
+style = "bg:green_cooler fg:bg_main bold"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -42,70 +78,113 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:#394260"
-format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
+style = "bg:cyan_cooler fg:bg_main"
+format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "bg:#394260"
-format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
+style = "bg:cyan_cooler fg:bg_main"
+format = '[$all_status$ahead_behind ]($style)'
 
-[nodejs]
-symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+[c]
+symbol = " "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
 
-[bun]
-symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
-
-[python]
-symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+[cpp]
+symbol = " "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
 
 [dotnet]
-symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+symbol = " "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
 
-[rust]
-symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+[elixir]
+symbol = " "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
+
+[elm]
+symbol = " "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
 
 [golang]
-symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+symbol = " "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
+
+[gradle]
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
+
+[haskell]
+symbol = " "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
+
+[java]
+symbol = " "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
+
+[julia]
+symbol = " "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
+
+[maven]
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
+
+[nodejs]
+symbol = " "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
+
+[bun]
+symbol = " "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
+
+[nim]
+symbol = "󰆥 "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
 
 [php]
-symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+symbol = " "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
+
+[python]
+symbol = " "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
+
+[rust]
+symbol = " "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
+
+[scala]
+symbol = " "
+style = "bg:blue_faint fg:bg_main"
+format = '[ $symbol ($version) ]($style)'
+
+[docker_context]
+symbol = " "
+style = "bg:magenta_cooler fg:bg_main"
+format = '[ $symbol $context ]($style)'
 
 [cmd_duration]
 min_time = 2000
-style = "bg:#1d2230"
-format = '[[  $duration ](fg:#e0af68 bg:#1d2230)]($style)'
+style = "bg:bg_blue_subtle fg:yellow_cooler"
+format = '[  $duration ]($style)'
 
 [time]
 disabled = false
 time_format = "%R"
-style = "bg:#1d2230"
-format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
-
-[os]
-style = "bg:#a3aed2 fg:#090c0c"
-format = "[ $symbol ]($style)"
-disabled = false
-
-[os.symbols]
-Windows = "󰍲"
-Ubuntu = "󰕈"
-Macos = "󰀵"
-Linux = "󰌽"
-Debian = "󰣚"
-Arch = "󰣇"
-Fedora = "󰣛"
-Alpine = ""
+style = "bg:bg_blue_subtle fg:fg_main"
+format = '[  $time ]($style)'
