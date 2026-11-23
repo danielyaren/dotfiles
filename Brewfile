@@ -1,8 +1,0 @@
-brew "stow"
-brew "sheldon"
-brew "starship"
-brew "fzf"
-brew "jq"
-brew "zoxide"
-brew "mise"
-cask "ghostty"

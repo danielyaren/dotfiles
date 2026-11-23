@@ -2,7 +2,7 @@
 
 ## Ghostty `ef-*` Themes
 
-The Ghostty color themes in `ghostty/.config/ghostty/themes/` are adapted from
+The Ghostty color themes in `files/.config/ghostty/themes/` are adapted from
 the [`ef-themes`](https://github.com/protesilaos/ef-themes) collection for GNU
 Emacs by **Protesilaos Stavrou**.
 

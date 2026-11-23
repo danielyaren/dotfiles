@@ -1,22 +1,22 @@
 # Dotfiles
 
-Managed with [GNU Stow](https://www.gnu.org/software/stow/).
+Managed with [mise](https://mise.jdx.dev/dotfiles.html) (`mise dotfiles` + `mise bootstrap`).
 
 ## Bootstrap on a new Mac
 
+Install [Homebrew](https://brew.sh/) and [mise](https://mise.jdx.dev/getting-started.html), then run:
+
 ```sh
-git clone git@github.com:danielyaren/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-brew bundle
-stow zsh starship scripts git ghostty mise
-mise install
-./macos.sh
+mise bootstrap --from git@github.com:danielyaren/dotfiles.git --from-dir ~/dotfiles --config-dir .config/mise
+killall Finder || true
 ```
 
 ## Updating
 
-* **CLI tools:** `brew bundle`
-* **Language runtimes:** `mise upgrade`
+* **Full sync / bootstrap:** `mise bootstrap` (or `mise bootstrap --dry-run` to preview)
+* **Dotfiles symlinks:** `mise dot apply` / `mise dot status`
+* **Tools & runtimes:** update pinned versions in `.config/mise/config.toml`, then run `mise install`
+* **Homebrew casks:** `mise bootstrap packages upgrade`
+* **macOS defaults:** `mise bootstrap macos defaults apply && killall Finder || true`
 * **Zsh plugins:** `sheldon lock --update`
-* **Re-apply symlinks:** `cd ~/dotfiles && stow -R zsh starship ghostty mise`
 * **Machine-local overrides / secrets:** put them in `~/.zshrc.local` (not tracked in git).

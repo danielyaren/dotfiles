@@ -1,0 +1,27 @@
+[tools]
+node = "26"
+ruby = "4.0"
+fzf = "0.75.0"
+jq = "1.8.2"
+sheldon = "0.8.5"
+starship = "1.27.0"
+zoxide = "0.10.0"
+
+[bootstrap.packages]
+"brew-cask:ghostty" = "latest"
+
+[bootstrap.settings.macos.finder]
+show_all_files = true
+
+[bootstrap.settings.macos.defaults."NSGlobalDomain"]
+AppleShowAllExtensions = true
+
+[dotfiles]
+"~/.zshrc" = { source = "../../files/.zshrc", mode = "symlink" }
+"~/.zprofile" = { source = "../../files/.zprofile", mode = "symlink" }
+"~/.config/sheldon/plugins.toml" = { source = "../../files/.config/sheldon/plugins.toml", mode = "symlink" }
+"~/.gitconfig" = { source = "../../files/.gitconfig", mode = "symlink" }
+"~/.config/starship.toml" = { source = "../../files/.config/starship.toml", mode = "symlink" }
+"~/.config/ghostty/config.ghostty" = { source = "../../files/.config/ghostty/config.ghostty", mode = "symlink" }
+"~/.config/ghostty/themes" = { source = "../../files/.config/ghostty/themes", mode = "symlink" }
+"~/.local/bin/agy-statusline.sh" = { source = "../../files/.local/bin/agy-statusline.sh", mode = "symlink" }
