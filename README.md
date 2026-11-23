@@ -2,7 +2,7 @@
 
 Managed with [mise](https://mise.jdx.dev/dotfiles.html) (`mise dotfiles` + `mise bootstrap`).
 
-## Bootstrap on a new Mac
+## Bootstrap
 
 Install [Homebrew](https://brew.sh/) and [mise](https://mise.jdx.dev/getting-started.html), then run:
 
